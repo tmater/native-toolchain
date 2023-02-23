@@ -28,8 +28,9 @@ if needs_build_package ; then
 
   setup_package_build $PACKAGE $PACKAGE_VERSION
 
-  cd lang/c++
+  BOOST_ROOT="${BUILD_DIR}"/boost-"${BOOST_VERSION}"
 
+  cd lang/c++
   mkdir -p build
   cd build
   wrap cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$LOCAL_INSTALL ..
