@@ -30,10 +30,16 @@ if needs_build_package ; then
 
   BOOST_ROOT="${BUILD_DIR}"/boost-"${BOOST_VERSION}"
 
+  echo "Boost root: ${BOOST_ROOT}"
+  ls -la ${BOOST_ROOT}
+
   cd lang/c++
   mkdir -p build
   cd build
-  wrap cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$LOCAL_INSTALL ..
+  wrap cmake -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=$LOCAL_INSTALL \
+    -DBOOST_ROOT=${BOOST_ROOT} \
+    ..
   wrap make -C . -j${BUILD_THREADS:-4}
 
   # Different versions of CMake produce different locations for the avro-c.pc file
